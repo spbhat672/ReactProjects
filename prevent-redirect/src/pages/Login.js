@@ -1,19 +1,17 @@
 import React from 'react'
-import { useNavigate,useLocation} from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 
 const Login = () => {
     const navigate = useNavigate();
-    const { state } = useLocation();
-
-     const { fromSpecificPage } = state || {};
 
   const handleSubmit=()=>{
     localStorage.setItem("auth", JSON.stringify({isLoggedIn:true}));
-    
-    if(fromSpecificPage){
-        navigate("/");
-    }else 
-    navigate(-1);
+    const urlParams = new URLSearchParams(window.location.search);
+    const navigatePath=urlParams.get("navigate")
+    if(navigatePath)
+    navigate(navigatePath);
+    else
+    navigate("/");
   }
 
   return (

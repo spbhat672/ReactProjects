@@ -3,6 +3,7 @@ import {BrowserRouter,Routes,Route,Navigate} from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Random from './pages/Random';
+import Random2 from './pages/Random2';
 
 function App() {
   return (
@@ -19,6 +20,11 @@ function App() {
               <Random/>
             </ProtectedRoute>
           }/>
+          <Route path="/random2/:parameters" element={
+            <ProtectedRoute>
+              <Random2/>
+            </ProtectedRoute>
+          }/>
           <Route path="/login" element={<Login/>}/>
         </Routes>
       </BrowserRouter>
@@ -30,8 +36,9 @@ export default App;
 
 export function ProtectedRoute({ children }) {
   if (localStorage.getItem("auth")) {
-    return children;
+    return <>{children}</>;
   } else {
-    return <Navigate to="/login" state={{ fromSpecificPage: true }}/>;
+    let uricomp= encodeURIComponent(window.location.pathname);
+    return <Navigate to={`/login?navigate=${uricomp}`}/>;
   }
 }

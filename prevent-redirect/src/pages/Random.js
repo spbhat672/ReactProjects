@@ -4,6 +4,7 @@ import { useParams,useNavigate } from "react-router-dom";
 const Random = () => {
     const navigate = useNavigate();
     const { parameters } = useParams();
+
   return (
     <div>Random
         <button onClick={() => {
