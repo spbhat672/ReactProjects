@@ -58,6 +58,7 @@ function App() {
         title="Student Details"
         columns={columns}
         data={studentData}
+        options={{ debounceInterval: 700, padding: "dense", filtering: true }}
         actions={[
           {icon:()=><button>Export</button>,// you can pass icon too
           tooltip:"Export to Excel",
